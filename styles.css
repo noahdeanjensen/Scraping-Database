@@ -26,6 +26,13 @@
     padding: 20px 0;
     border-bottom: 1px solid silver;
   }
+
+  .center h4{
+    text-align: center;
+    padding: 20px 0;
+    color: #a6a6a6;
+    padding-bottom: 5px;
+  }
   .center form{
     padding: 0 40px;
     box-sizing: border-box;
@@ -73,7 +80,14 @@
   .txt_field input:valid ~ span::before{
     width: 100%;
   }
-  .pass{
+
+  .pass {
+    margin: -5px 0 20px 5px;
+    color: #a6a6a6;
+    cursor: pointer;
+  }
+
+  .pass a{
     margin: -5px 0 20px 5px;
     color: #a6a6a6;
     cursor: pointer;
