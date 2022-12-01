@@ -1,0 +1,91 @@
+CREATE DATABASE Final;
+CREATE TABLE Customer(
+    CustomerID int IDENTITY(1,1) PRIMARY KEY,
+    Fname varchar(255) NOT NULL,
+  	Lname varchar(255) NOT NULL,
+  	Username varchar(255) NOT NULL,
+  	Password varchar(255) NOT NULL,
+  	Address varchar(255) NOT NULL
+);
+GO
+
+CREATE TABLE Payment_Type(
+    CardID int IDENTITY(1,1) PRIMARY KEY,
+    CardType varchar(255) NOT NULL,
+  	CardNum varchar(255) NOT NULL,
+  	Username int NOT NULL,
+  	SecurityCode int NOT NULL,
+  	CustomerID int Foreign KEY REFERENCES Customer(CustomerID)
+);
+GO
+
+CREATE TABLE Orders(
+    OrderID int IDENTITY(1,1) PRIMARY KEY,
+    Ordered varchar(255) NOT NULL,
+  	Delivered varchar(255) NOT NULL,
+  	CustomerID int Foreign KEY REFERENCES Customer(CustomerID)
+);
+GO
+
+Create TABLE Shopping_Cart(
+  	Shopping_CartID int IDENTITY(1, 1) PRIMARY KEY,
+);
+GO
+
+CREATE TABLE ShoppingCart_Customer(
+  	ShoppingCart_CustomerID int IDENTITY(1,1) PRIMARY KEY,
+  	Shopping_CartID int FOREIGN KEY REFERENCES Shopping_Cart(Shopping_CartID),
+  	CustomerID int Foreign KEY REFERENCES Customer(CustomerID),
+  	Item varchar(255) NOT NULL
+);
+GO
+
+Create TABLE List(
+  	ListID int IDENTITY(1, 1) PRIMARY KEY,
+  	ListName varchar(255) NOT NULL
+);
+GO
+
+CREATE TABLE List_Customer(
+  	List_CustomerID int IDENTITY(1,1) PRIMARY KEY,
+  	ListID int FOREIGN KEY REFERENCES List(ListID),
+  	CustomerID int Foreign KEY REFERENCES Customer(CustomerID)
+);
+GO
+
+CREATE TABLE Product_Type(
+  	ProductTypeID int IDENTITY(1,1) PRIMARY KEY,
+  	Category varchar(255) NOT NULL
+);
+GO
+
+CREATE TABLE Products(
+  	ProductID int IDENTITY(1,1) PRIMARY KEY,
+  	Size varchar(255) NOT NULL,
+  	Color varchar(255) NOT NULL,
+  	Gender varchar(255) NOT NULL,
+  	Activity varchar(255) NOT NULL,
+  	CustomerID int FOREIGN KEY REFERENCES Customer(CustomerID)
+);
+GO
+ 
+ CREATE TABLE ProductType_Product(
+   	ProductType_ProductID int IDENTITY(1,1) PRIMARY KEY,
+   	ProductTypeID int foreign key REFERENCES Product_Type(ProductTypeID),
+   	ProductID int foreign key REFERENCES Products(ProductID)
+);
+GO
+
+CREATE TABLE Supplier(
+  	SupplierID int IDENTITY(1,1) PRIMARY KEY,
+  	Name varchar(255) NOT NULL,
+  	Website varchar(255) NOT NULL,
+  	ProductCost int NOT NULL
+);
+GO
+
+create TABLE Supplier_Products(
+  	Supplier_ProductsID int IDENTITY(1,1) PRIMARY KEY,
+  	SupplierID int FOREIGN KEY REFERENCES Supplier(SupplierID),
+  	ProductID int Foreign key REFERENCES Products(ProductID)
+);
