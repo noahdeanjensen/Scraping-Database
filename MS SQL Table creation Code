@@ -13,7 +13,6 @@ CREATE TABLE Payment_Type(
     CardID int IDENTITY(1,1) PRIMARY KEY,
     CardType varchar(255) NOT NULL,
   	CardNum varchar(255) NOT NULL,
-  	Username int NOT NULL,
   	SecurityCode int NOT NULL,
   	CustomerID int Foreign KEY REFERENCES Customer(CustomerID)
 );
@@ -29,6 +28,7 @@ GO
 
 Create TABLE Shopping_Cart(
   	Shopping_CartID int IDENTITY(1, 1) PRIMARY KEY,
+    ShoppingCartName varchar(255) NOT NULL
 );
 GO
 
@@ -50,6 +50,7 @@ CREATE TABLE List_Customer(
   	List_CustomerID int IDENTITY(1,1) PRIMARY KEY,
   	ListID int FOREIGN KEY REFERENCES List(ListID),
   	CustomerID int Foreign KEY REFERENCES Customer(CustomerID)
+    List_Item varchar(255) NOT NULL
 );
 GO
 
@@ -64,7 +65,6 @@ CREATE TABLE Products(
   	Size varchar(255) NOT NULL,
   	Color varchar(255) NOT NULL,
   	Gender varchar(255) NOT NULL,
-  	Activity varchar(255) NOT NULL,
   	CustomerID int FOREIGN KEY REFERENCES Customer(CustomerID)
 );
 GO
@@ -80,12 +80,12 @@ CREATE TABLE Supplier(
   	SupplierID int IDENTITY(1,1) PRIMARY KEY,
   	Name varchar(255) NOT NULL,
   	Website varchar(255) NOT NULL,
-  	ProductCost int NOT NULL
 );
 GO
 
-create TABLE Supplier_Products(
+CREATE TABLE Supplier_Products(
   	Supplier_ProductsID int IDENTITY(1,1) PRIMARY KEY,
   	SupplierID int FOREIGN KEY REFERENCES Supplier(SupplierID),
-  	ProductID int Foreign key REFERENCES Products(ProductID)
+  	ProductID int Foreign key REFERENCES Products(ProductID),
+    Cost int NOT NULL
 );
